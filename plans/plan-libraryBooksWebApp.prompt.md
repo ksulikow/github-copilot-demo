@@ -1,12 +1,12 @@
 # Plan: Library Books Web App
 
-Build a full-stack single-page library management app using Angular (frontend), Node.js + Express + TypeScript (backend), and local MySQL (SQL persistence). Scope includes book catalog CRUD plus borrow/return workflows and availability tracking, with no authentication in v1.
+Build a full-stack single-page library management app using Angular (frontend), Node.js + Express + TypeScript (backend), and local SQLite (SQL persistence). Scope includes book catalog CRUD plus borrow/return workflows and availability tracking, with no authentication in v1.
 
 ## Steps
 
 1. Phase 1: Project bootstrap and architecture baseline
 2. Define mono-repo layout with separate backend and frontend apps and shared API contract notes. Backend and frontend setup can run in parallel after folder structure is agreed.
-3. Initialize backend Node.js TypeScript service with Express, validation, ORM/query layer, and environment configuration for local MySQL.
+3. Initialize backend Node.js TypeScript service with Express, validation, ORM/query layer, and environment configuration for local SQLite.
 4. Initialize Angular SPA with routing, HTTP client integration, and app-wide state/service structure for books and circulation views.
 5. Create initial architecture decision and implementation notes aligned with repository documentation standards.
 6. Phase 2: Data model and REST contract
@@ -34,8 +34,8 @@ Build a full-stack single-page library management app using Angular (frontend), 
 28. Add scripts for local run, test, lint, and DB migration/seed orchestration.
 29. Verify coverage against repository policy and update docs for setup/run/troubleshooting.
 30. Phase 6: Documentation and handoff
-31. Add concise README sections: prerequisites, local MySQL setup, environment variables, startup commands, API overview, and known limitations.
-32. Add ADR describing chosen architecture and trade-offs (Angular + Express + MySQL, no auth in v1, transaction strategy).
+31. Add concise README sections: prerequisites, local SQLite setup, environment variables, startup commands, API overview, and known limitations.
+32. Add ADR describing chosen architecture and trade-offs (Angular + Express + SQLite, no auth in v1, transaction strategy).
 33. Capture future backlog: auth/roles, reservation queue, fines, notifications, reporting.
 
 ## Relevant files
@@ -57,7 +57,7 @@ Build a full-stack single-page library management app using Angular (frontend), 
 5. Run lint/test/build for Angular app and manually verify CRUD + borrow/return workflows.
 6. Confirm responsive behavior on desktop and mobile widths.
 7. Integration validation
-8. Start both apps with local MySQL and run end-to-end smoke tests for: create book, borrow book, return book, search/filter.
+8. Start both apps with local SQLite and run end-to-end smoke tests for: create book, borrow book, return book, search/filter.
 9. Confirm DB state transitions are correct after each operation.
 10. Documentation and policy validation
 11. Ensure setup docs allow a clean machine to run the app.
@@ -66,7 +66,7 @@ Build a full-stack single-page library management app using Angular (frontend), 
 ## Decisions
 
 - Confirmed stack: Node.js + Express + TypeScript backend, Angular SPA frontend.
-- Confirmed persistence: local MySQL instance.
+- Confirmed persistence: local SQLite file.
 - Confirmed v1 security scope: no authentication.
 - Confirmed feature scope: include borrow/return workflows and availability tracking.
 - Included scope: book catalog + circulation core.
