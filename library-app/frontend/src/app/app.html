@@ -1,0 +1,188 @@
+<div class="page-shell">
+  <header class="hero">
+    <p class="eyebrow">City Library Desk</p>
+    <h1>Books and Circulation</h1>
+    <p class="subtitle">Manage catalog entries, track availability, and process borrow and return operations in one place.</p>
+  </header>
+
+  @if (errorMessage) {
+    <p class="banner error" role="alert">{{ errorMessage }}</p>
+  }
+
+  @if (successMessage) {
+    <p class="banner success" role="status">{{ successMessage }}</p>
+  }
+
+  <section class="controls card">
+    <label for="searchInput">Search books</label>
+    <input id="searchInput" #searchInput type="text" placeholder="Title, author, or ISBN" [value]="search" />
+    <div class="control-actions">
+      <button type="button" (click)="applyFilters(searchInput.value)">Apply Search</button>
+      <button type="button" class="ghost" (click)="toggleAvailabilityOnly()">
+        {{ availableOnly ? 'Showing Available Only' : 'Show Available Only' }}
+      </button>
+      <button type="button" class="ghost" (click)="toggleActiveLoansOnly()">
+        {{ activeOnly ? 'Showing Active Loans' : 'Show Active Loans' }}
+      </button>
+    </div>
+  </section>
+
+  <main class="grid-layout">
+    <section class="card">
+      <h2>{{ editingBookId ? 'Edit Book' : 'Add New Book' }}</h2>
+      <form [formGroup]="bookForm" (ngSubmit)="saveBook()" class="form-grid">
+        <label>
+          Title
+          <input type="text" formControlName="title" />
+        </label>
+
+        <label>
+          Author
+          <input type="text" formControlName="author" />
+        </label>
+
+        <label>
+          ISBN
+          <input type="text" formControlName="isbn" />
+        </label>
+
+        <label>
+          Published Year
+          <input type="number" formControlName="publishedYear" />
+        </label>
+
+        <label>
+          Total Copies
+          <input type="number" min="0" formControlName="totalCopies" />
+        </label>
+
+        <div class="inline-actions">
+          <button type="submit">{{ editingBookId ? 'Update Book' : 'Create Book' }}</button>
+          @if (editingBookId) {
+            <button type="button" class="ghost" (click)="cancelEdit()">Cancel Edit</button>
+          }
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Borrow Book</h2>
+      <form [formGroup]="borrowForm" (ngSubmit)="borrowBook()" class="form-grid">
+        <label>
+          Book ID
+          <input type="number" min="1" formControlName="bookId" />
+        </label>
+
+        <label>
+          Borrower Name
+          <input type="text" formControlName="borrowerName" />
+        </label>
+
+        <label>
+          Borrower Email
+          <input type="email" formControlName="borrowerEmail" />
+        </label>
+
+        <label>
+          Due Date (optional)
+          <input type="date" formControlName="dueDate" />
+        </label>
+
+        <div class="inline-actions">
+          <button type="submit">Borrow</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <section class="card">
+    <h2>Catalog</h2>
+    @if (loading) {
+      <p>Loading books...</p>
+    } @else {
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>ISBN</th>
+              <th>Available</th>
+              <th>Total</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (book of books; track book.id) {
+              <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.availableCopies }}</td>
+                <td>{{ book.totalCopies }}</td>
+                <td>
+                  <div class="inline-actions compact">
+                    <button type="button" (click)="startEdit(book)">Edit</button>
+                    <button type="button" class="ghost" (click)="selectBookForBorrowing(book.id)">Use in Borrow Form</button>
+                    <button type="button" class="danger" (click)="archiveBook(book.id)">Archive</button>
+                  </div>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="7">No books found.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+
+  <section class="card">
+    <h2>Loans</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Book</th>
+            <th>Borrower</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (loan of loans; track loan.id) {
+            <tr>
+              <td>{{ loan.id }}</td>
+              <td>{{ loan.bookTitle }}</td>
+              <td>
+                {{ loan.borrowerName }}<br />
+                <small>{{ loan.borrowerEmail }}</small>
+              </td>
+              <td>{{ loan.dueDate }}</td>
+              <td>
+                <span [class.overdue]="loan.isOverdue">{{ loan.status }}{{ loan.isOverdue ? ' (OVERDUE)' : '' }}</span>
+              </td>
+              <td>
+                @if (loan.status === 'ACTIVE') {
+                  <button type="button" (click)="returnLoan(loan.id)">Return</button>
+                } @else {
+                  <span>Completed</span>
+                }
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6">No loans found.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
