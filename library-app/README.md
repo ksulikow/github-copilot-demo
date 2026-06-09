@@ -42,6 +42,7 @@ npm run db:init
 ```bash
 npm run dev
 ```
+
 Backend runs at `http://localhost:3000`.
 
 ## Frontend Setup
@@ -54,6 +55,7 @@ cd library-app/frontend
 ```bash
 npm start
 ```
+
 Frontend runs at `http://localhost:4200`.
 
 ## Useful Commands
