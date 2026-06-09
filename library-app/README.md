@@ -31,21 +31,21 @@ Single-page library management application with:
 cd library-app/backend
 ```
 
-2. Copy environment file:
+1. Copy environment file:
 
 ```bash
 copy .env.example .env
 ```
 
-3. Optional: update `DB_FILE` in `.env` if you want the database file in a different location.
+1. Optional: update `DB_FILE` in `.env` if you want the database file in a different location.
 
-4. Initialize database schema and seed data:
+1. Initialize database schema and seed data:
 
 ```bash
 npm run db:init
 ```
 
-5. Start API in development mode:
+1. Start API in development mode:
 
 ```bash
 npm run dev
@@ -61,7 +61,7 @@ Backend runs at `http://localhost:3000`.
 cd library-app/frontend
 ```
 
-2. Start Angular dev server:
+1. Start Angular dev server:
 
 ```bash
 npm start

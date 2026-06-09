@@ -1,8 +1,9 @@
-## Plan: Library Books Web App
+# Plan: Library Books Web App
 
 Build a full-stack single-page library management app using Angular (frontend), Node.js + Express + TypeScript (backend), and local MySQL (SQL persistence). Scope includes book catalog CRUD plus borrow/return workflows and availability tracking, with no authentication in v1.
 
-**Steps**
+## Steps
+
 1. Phase 1: Project bootstrap and architecture baseline
 2. Define mono-repo layout with separate backend and frontend apps and shared API contract notes. Backend and frontend setup can run in parallel after folder structure is agreed.
 3. Initialize backend Node.js TypeScript service with Express, validation, ORM/query layer, and environment configuration for local MySQL.
@@ -37,7 +38,8 @@ Build a full-stack single-page library management app using Angular (frontend), 
 32. Add ADR describing chosen architecture and trade-offs (Angular + Express + MySQL, no auth in v1, transaction strategy).
 33. Capture future backlog: auth/roles, reservation queue, fines, notifications, reporting.
 
-**Relevant files**
+## Relevant files
+
 - c:/Users/KRSULIKO/source/repos/ksulikow/github-copilot-demo/.github/copilot-instructions.md — enforce branch, commit, PR, and quality policy decisions
 - c:/Users/KRSULIKO/source/repos/ksulikow/github-copilot-demo/.github/instructions/backend.instructions.md — backend coding and architecture conventions
 - c:/Users/KRSULIKO/source/repos/ksulikow/github-copilot-demo/.github/instructions/frontend.instructions.md — frontend quality and accessibility conventions
@@ -46,7 +48,8 @@ Build a full-stack single-page library management app using Angular (frontend), 
 - c:/Users/KRSULIKO/source/repos/ksulikow/github-copilot-demo/README.md — top-level setup and usage documentation updates
 - New app subtree to create: /library-app/backend and /library-app/frontend
 
-**Verification**
+## Verification
+
 1. Backend validation
 2. Run lint/typecheck/test for backend; verify API responses for success and failure cases.
 3. Validate transactional correctness with concurrent borrow attempts.
@@ -60,7 +63,8 @@ Build a full-stack single-page library management app using Angular (frontend), 
 11. Ensure setup docs allow a clean machine to run the app.
 12. Run repository policy/coverage scripts where applicable.
 
-**Decisions**
+## Decisions
+
 - Confirmed stack: Node.js + Express + TypeScript backend, Angular SPA frontend.
 - Confirmed persistence: local MySQL instance.
 - Confirmed v1 security scope: no authentication.
@@ -68,7 +72,8 @@ Build a full-stack single-page library management app using Angular (frontend), 
 - Included scope: book catalog + circulation core.
 - Excluded scope (v1): multi-branch libraries, fines/payments, notifications, external integrations.
 
-**Further Considerations**
+## Further Considerations
+
 1. Borrowing policy detail to finalize before implementation: fixed loan duration (for example 14 days) vs configurable duration stored per loan.
 2. Data retention strategy: hard delete books vs soft delete with archival status (recommended soft delete).
 3. API versioning choice: start with /api/v1 from day one (recommended) to prevent early breaking changes.
