@@ -26,47 +26,34 @@ Single-page library management application with:
 ## Backend Setup
 
 1. Go to backend:
-
 ```bash
 cd library-app/backend
 ```
-
-1. Copy environment file:
-
+2. Copy environment file:
 ```bash
 copy .env.example .env
 ```
-
-1. Optional: update `DB_FILE` in `.env` if you want the database file in a different location.
-
-1. Initialize database schema and seed data:
-
+3. Optional: update `DB_FILE` in `.env` if you want the database file in a different location.
+4. Initialize database schema and seed data:
 ```bash
 npm run db:init
 ```
-
-1. Start API in development mode:
-
+5. Start API in development mode:
 ```bash
 npm run dev
 ```
-
 Backend runs at `http://localhost:3000`.
 
 ## Frontend Setup
 
 1. Go to frontend:
-
 ```bash
 cd library-app/frontend
 ```
-
-1. Start Angular dev server:
-
+2. Start Angular dev server:
 ```bash
 npm start
 ```
-
 Frontend runs at `http://localhost:4200`.
 
 ## Useful Commands
